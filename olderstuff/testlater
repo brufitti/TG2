@@ -1,0 +1,24 @@
+import math
+
+def calculate_distances(x, y):
+    # Define the coordinates of the three points
+    x1, y1 = 1, 2
+    x2, y2 = 2, 3
+    x3, y3 = 3, 0
+
+    # Calculate the distances between the given point and the three points
+    r1 = math.sqrt((x - x1)**2 + (y - y1)**2)
+    r2 = math.sqrt((x - x2)**2 + (y - y2)**2)
+    r3 = math.sqrt((x - x3)**2 + (y - y3)**2)
+
+    return r1, r2, r3
+
+def triangulate_point(r1, r2, r3):
+    # Calculate the circumradius of the triangle formed by the three points
+    R = (r1*r2*r3) / math.sqrt((r1 + r2 + r3)*(r1 + r2 - r3)*(r1 - r2 + r3)*(-r1 + r2 + r3))
+
+    # Calculate the coordinates of the circumcenter of the triangle
+    x = (R**2 * (y2 - y1) + r1**2 * (y3 - y2) + r2**2 * (y1 - y3)) / (2 * (x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2)))
+    y = (R**2 * (x2 - x1) + r1**2 * (x3 - x2) + r2**2 * (x1 - x3)) / (2 * (y1*(x2 - x3) + y2*(x3 - x1) + y3*(x1 - x2)))
+
+    return x, y
