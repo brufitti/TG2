@@ -19,6 +19,7 @@ from simulator import sim
 from simulator import SimConnection
 from math import pi
 from RSS import RSS
+import threading as th
 
 """
 
@@ -32,10 +33,38 @@ update
 
 """
 tref = time.time()
+P  = {}
+V  = []
+A = []
+t = []
+def speedcaler(freq):
+    '''
+    Devem existir as listas globais V (velocidade) e A (aceleração)
+    deve ser passada a frequëncia de pulling do sensor de velocidade
+    (exemplo: 60hz, 80hz, 100hz, não é recomendado o uso de mais que 100hz)
+    '''
+    tref = time.time()
+    t.append(t0)
+    T = 1/freq
+    t0 = tref
+    v0 = 0
+    while True:
+        v1 = car.getVelocity()
+        t1 = time.time()
+        if t1-t0 == 0:
+            dt = 0.01
+        else:
+            dt = t1-t0
+        accel = (v1-v0)/(dt)
+        V.append(v1)
+        A.append(accel)
+        t.append(t1)
+        t0 = t1
+        time.sleep((T)-(time.time()-tref)%T)
+        
 
-def measureData():
-    t = time.time()
-    V = car.getVelocity()
+            
+        
     
 
     
