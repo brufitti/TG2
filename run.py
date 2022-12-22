@@ -39,12 +39,13 @@ data = open("data.txt", "a")
 V  = []
 Aa = []
 t = []
-def speedCaller(freq):
+def speedCaller(freq, stopall):
     '''
     Devem existir as listas globais V (velocidade) e Aa (aceleração angular).
     Deve ser passada a frequëncia de pulling do sensor de velocidade
     (exemplo: 60hz, 80hz, 100hz, não é recomendado o uso de mais que 100hz)
     '''
+    print("speedCaller is on")
     tref = time()
     T, t0, o0 = 1/freq, tref, 0
     while 1:
@@ -60,7 +61,10 @@ def speedCaller(freq):
         t0 = t1
         sleep((T)-(time()-tref)%T)
 
-def dataCaller(freq):
+        
+        
+def dataCaller(freq, stopall):
+    print("dataCaller is on")
     '''
     Devem existir as variáveis globais t (tempo de aglutinação), V (velocidade),
     Aa (aceleração Angular) e a lista P (posição pelo RSS).
@@ -80,13 +84,11 @@ def dataCaller(freq):
         V.clear()
         Aa.clear()
         i += 1
+        print(Vi)
         sleep((T)-(time()-tref)%T)
+
         
-
-
-
-
-
+    
 #start
 if __name__ == '__main__':
     conn = SimConnection()
@@ -100,21 +102,21 @@ if __name__ == '__main__':
     tref = time()
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
+    stopall = th.Event()
     th1 = th.Thread(target = speedCaller)
     th2 = th.Thread(target = dataCaller)
-    th3 = th.Thread(target = car.autopilot(0.5))
+    th3 = th.Thread(target = car.autopilot(0.3))
     
 #só roda se a conexão for realizada.
-
-th3.start()
 th1.start()
 th2.start()
+th3.start()
 data.write("New dataset\n")
 data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real")
 tstart = time()
-while time()< tstart+1200:
+while time()< tstart+12:
     N = None
-
+stopall.set()
 data.close()
 
 #Encerra a conexão
