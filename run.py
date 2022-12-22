@@ -13,7 +13,7 @@ o tempo que leva para levar o carro do repouso a velocidade final, portanto uma 
 t=v [segundos]
 '''
 import sys
-import time
+from time import time, sleep
 from P3DX import P3DX
 from simulator import sim
 from simulator import SimConnection
@@ -32,42 +32,60 @@ Calc accel
 update
 
 """
-tref = time.time()
-P  = {}
+tref = time()
+data = open("data.txt", "a")
+
+
 V  = []
-A = []
+Aa = []
 t = []
-def speedcaler(freq):
+def speedCaller(freq):
     '''
-    Devem existir as listas globais V (velocidade) e A (aceleração)
-    deve ser passada a frequëncia de pulling do sensor de velocidade
+    Devem existir as listas globais V (velocidade) e Aa (aceleração angular).
+    Deve ser passada a frequëncia de pulling do sensor de velocidade
     (exemplo: 60hz, 80hz, 100hz, não é recomendado o uso de mais que 100hz)
     '''
-    tref = time.time()
-    t.append(t0)
-    T = 1/freq
-    t0 = tref
-    v0 = 0
-    while True:
-        v1 = car.getVelocity()
-        t1 = time.time()
-        if t1-t0 == 0:
-            dt = 0.01
-        else:
+    tref = time()
+    T, t0, o0 = 1/freq, tref, 0
+    while 1:
+        V.append(car.getVelocity())
+        o1 =car.getOrientation()
+        t1 = time()
+        if t1-t0 != 0:
             dt = t1-t0
-        accel = (v1-v0)/(dt)
-        V.append(v1)
-        A.append(accel)
-        t.append(t1)
+        else:
+            dt = 0.001
+        Aa.append((o1-o0)/(dt))
+        o0= o1
         t0 = t1
-        time.sleep((T)-(time.time()-tref)%T)
+        sleep((T)-(time()-tref)%T)
+
+def dataCaller(freq):
+    '''
+    Devem existir as variáveis globais t (tempo de aglutinação), V (velocidade),
+    Aa (aceleração Angular) e a lista P (posição pelo RSS).
+    Deve ser passada a frequência de aglutinação dos dados.
+    '''
+    t0 = time()
+    T = 1/freq
+    tref = t0
+    i = 1
+    while 1:
+        PosR = car.getPosition()
+        Vi = sum(V)/len(V)
+        Aai = sum(Aa)/len(Aa)
+        Pos = finder.ReadSensor()
+        t1 = time()
+        data.write(Vi, " | ", Aai, " | ", Pos, " | ", t1, " | ", PosR, "\n")
+        V.clear()
+        Aa.clear()
+        i += 1
+        sleep((T)-(time()-tref)%T)
         
 
-            
-        
-    
 
-    
+
+
 
 #start
 if __name__ == '__main__':
@@ -79,28 +97,30 @@ if __name__ == '__main__':
     print("Running with ping of " + str(ping) + " s.")
     print("-------------------------------")
     #create objects
-    tref = time.time()
+    tref = time()
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
-
+    th1 = th.Thread(target = speedCaller)
+    th2 = th.Thread(target = dataCaller)
+    th3 = th.Thread(target = car.autopilot(0.5))
     
 #só roda se a conexão for realizada.
-car.Speed = 0.5
-time.sleep(car.operationtime)
-time.sleep(1-car.operationtime)
-car.Speed = 0
-time.sleep(car.operationtime)
-x, y =finder.ReadSensor()
-print(x, y)
 
+th3.start()
+th1.start()
+th2.start()
+data.write("New dataset\n")
+data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real")
+tstart = time()
+while time()< tstart+1200:
+    N = None
 
-
-
+data.close()
 
 #Encerra a conexão
 print("-------------------------------")
 print('closing connection')
-time.sleep(0.25) #tempo para garantir o envio do ultimo comando
+sleep(0.25) #tempo para garantir o envio do ultimo comando
 conn.close() #encerra a conexão com o simulador
 
 

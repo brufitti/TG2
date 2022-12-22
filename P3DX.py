@@ -103,7 +103,7 @@ class P3DX:
     def autopilot(self, speed):
         prev_detect = [False, False, False, False]
 
-        while True:
+        while 1:
             cte = 1
             if keyboard.is_pressed('ctrl'):
                 print("Saindo do piloto automático")
