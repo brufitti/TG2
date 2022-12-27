@@ -32,18 +32,6 @@ class RSS:
             code, d = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_buffer)
             self.D[i] = float(((d[0]**2) + (d[1]**2))**0.5)
     
-    def triangulate(self):
-        x1,y1,x2,y2 = self.getIntersections(self.P1[0],self.P1[1],self.D[0],self.P2[0],self.P2[1],self.D[1])
-        x3,y3,x4,y4 = self.getIntersections(x0=self.P1[0],y0=self.P1[1],r0=self.D[0],x1=self.P3[0],y1=self.P3[1],r1=self.D[2])
-        if ((x1 == x3) and (y1 == y3)):
-            return [x1, y1]
-        elif ((x1 == x4) and (y1 == y4)):
-            return [x1, y1]
-        elif ((x2 == x3) and (y2 == y3)):
-            return [x2, y2]
-        else:
-            return [x2, y2]
-    
     def getIntersections(self, x0, y0, r0, x1, y1, r1):
         # circle 1: (x0, y0), radius r0
         # circle 2: (x1, y1), radius r1
@@ -71,6 +59,19 @@ class RSS:
             y4=y2+h*(x1-x0)/d
             
             return (x3, y3, x4, y4)
+        
+    def triangulate(self):
+        x1,y1,x2,y2 = self.getIntersections(self.P1[0],self.P1[1],self.D[0],self.P2[0],self.P2[1],self.D[1])
+        x3,y3,x4,y4 = self.getIntersections(x0=self.P1[0],y0=self.P1[1],r0=self.D[0],x1=self.P3[0],y1=self.P3[1],r1=self.D[2])
+        if ((x1 == x3) and (y1 == y3)):
+            return [x1, y1]
+        elif ((x1 == x4) and (y1 == y4)):
+            return [x1, y1]
+        elif ((x2 == x3) and (y2 == y3)):
+            return [x2, y2]
+        else:
+            return [x2, y2]
+    
         
     def ReadSensor(self):
         self.readDistances()

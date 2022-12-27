@@ -1,10 +1,9 @@
-from time import sleep
+from time import sleep, time
 from simulator import sim
 from simulator import SimConnection
 import math
 from math import pi
 import keyboard
-import random
 
 class P3DX:
     def __init__(self, connectionID,
@@ -57,12 +56,13 @@ class P3DX:
     def getVelocity(self, returnnumber = 1):
         code, velocity, angular = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_buffer)
         v0 = math.sqrt((velocity[0]**2) + (velocity[1]**2) + (velocity[2]**2))
+        va0 = angular[2]*(180/pi)
         if returnnumber == 1:
             return v0
         elif returnnumber == 2:
-            return velocity
+            return va0
         else:
-            return [v0, velocity]
+            return [v0, velocity, va0, angular]
 
     def getOrientation(self):
         returnCode, orientation = sim.simxGetObjectOrientation(self.connectionID, self.pioneer,-1, sim.simx_opmode_buffer)
@@ -102,8 +102,9 @@ class P3DX:
         
     def autopilot(self, speed):
         prev_detect = [False, False, False, False]
-
-        while 1:
+        tloop0 = time()
+        
+        while 1:    
             cte = 1
             if keyboard.is_pressed('ctrl'):
                 print("Saindo do piloto automático")
@@ -126,7 +127,7 @@ class P3DX:
             #testa se precisa virar
             for i in range(0,4):
                 if (detect[i] == True and detect[i] != prev_detect[i]):
-                    print("parede", self.walls[i], "encontrada")
+                    print("parede", i, "encontrada")
                     err, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
                     inangle = angles[2]*180/pi
                     print("inangle: ", inangle)
@@ -168,7 +169,8 @@ class P3DX:
                             sleep(self.operationtime)
                             self.Speed = 0
                             sleep(self.operationtime)
-      
+            print(time()-tloop0)
+            tloop0 = time()
             prev_detect = detect
             
 
