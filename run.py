@@ -20,7 +20,7 @@ from simulator import SimConnection
 from math import pi
 from RSS import RSS
 import threading as th
-
+import queue
 """
 
 A fazer:
@@ -32,39 +32,45 @@ Calc accel
 update
 
 """
-tref = time()
-data = open("data.txt", "a")
 
+V  = queue.Queue()
+Aa = queue.Queue()
+t = queue.Queue()
 
-V  = []
-Aa = []
-t = []
-def speedCaller(freq, stopall):
+def get_all(queue):
+    list = []
+    counter = 0 
+    while not queue.empty():
+        list.append(queue.get())
+    return list
+
+def speedCaller(freq, car):
     '''
     Devem existir as listas globais V (velocidade) e Aa (aceleração angular).
     Deve ser passada a frequëncia de pulling do sensor de velocidade
     (exemplo: 60hz, 80hz, 100hz, não é recomendado o uso de mais que 100hz)
     '''
-    print("speedCaller is on")
+    sleep(0.1)
     tref = time()
     T, t0, o0 = 1/freq, tref, 0
-    while 1:
-        V.append(car.getVelocity())
-        o1 =car.getOrientation()
+    global V, Aa, t
+    for i in range(0, 1200*freq):
+        vel = car.getVelocity()
+        V.put(vel)
+        o1 = car.getOrientation()
         t1 = time()
         if t1-t0 != 0:
             dt = t1-t0
         else:
             dt = 0.001
-        Aa.append((o1-o0)/(dt))
+        Aa.put((o1-o0)/(dt))
         o0= o1
         t0 = t1
         sleep((T)-(time()-tref)%T)
 
         
         
-def dataCaller(freq, stopall):
-    print("dataCaller is on")
+def dataCaller(freq, finder, car):
     '''
     Devem existir as variáveis globais t (tempo de aglutinação), V (velocidade),
     Aa (aceleração Angular) e a lista P (posição pelo RSS).
@@ -74,23 +80,35 @@ def dataCaller(freq, stopall):
     T = 1/freq
     tref = t0
     i = 1
-    while 1:
+    global V, Aa, t, data
+    Vlist = [0]
+    Aalist = [0]
+    for i in range(0, 1200*freq):
+        sleep(0.1)
+        test = True
         PosR = car.getPosition()
-        Vi = sum(V)/len(V)
-        Aai = sum(Aa)/len(Aa)
+        if ((not V.empty()) and (not Aa.empty())):
+            if test == True:
+                Vlist = get_all(V)
+                Aalist = get_all(Aa)
+                test = False
+            else:
+                Aalist = get_all(V)
+                Vlist = get_all(Aa)
+                test = True  
+        Vi = sum(Vlist)/len(Vlist)
+        Aai = sum(Aalist)/len(Aalist)
         Pos = finder.ReadSensor()
         t1 = time()
-        data.write(Vi, " | ", Aai, " | ", Pos, " | ", t1, " | ", PosR, "\n")
-        V.clear()
-        Aa.clear()
-        i += 1
-        print(Vi)
+        text = str(Vi)+" | "+str(Aai)+ " | " +str(Pos)+" | "+str(t1)+" | "+ str(PosR)+"\n"
+        data.write(text)
         sleep((T)-(time()-tref)%T)
 
         
     
 #start
-if __name__ == '__main__':
+if __name__ == "__main__":
+    data = open("data.txt", "a")
     conn = SimConnection()
     if conn.id == -1:
         sys.exit("Could not connect.")
@@ -103,34 +121,23 @@ if __name__ == '__main__':
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
     stopall = th.Event()
-    th1 = th.Thread(target = speedCaller)
-    th2 = th.Thread(target = dataCaller)
-    th3 = th.Thread(target = car.autopilot(0.3))
+    data.write("New dataset\n")
+    data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n")
+    th1 = th.Thread(target = speedCaller, args=(100,car,))
+    th2 = th.Thread(target = dataCaller, args=(20,finder,car,))
+    #da um pontapé no veículo para inicializar corretamente os sensores
+    car.Speed = 0.3
+    sleep(0.3)
+    car.Speed = 0
+    sleep(car.operationtime)
+    #inicia as funções
+    th1.start()
+    th2.start()
+    car.autopilot(0.3)
     
-#só roda se a conexão for realizada.
-th1.start()
-th2.start()
-th3.start()
-data.write("New dataset\n")
-data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real")
-tstart = time()
-while time()< tstart+12:
-    N = None
-stopall.set()
-data.close()
-
-#Encerra a conexão
-print("-------------------------------")
-print('closing connection')
-sleep(0.25) #tempo para garantir o envio do ultimo comando
-conn.close() #encerra a conexão com o simulador
-
-
-
-
-
-
-
-
-
-
+    #Encerra a conexão e fecha o arquivo
+    data.close()
+    print("-------------------------------")
+    print('closing connection')
+    sleep(0.25) #tempo para garantir o envio do ultimo comando
+    conn.close() #encerra a conexão com o simulador

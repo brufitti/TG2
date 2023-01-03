@@ -1,4 +1,4 @@
-from time import sleep
+from time import sleep, time
 from simulator import sim
 from simulator import SimConnection
 import math
@@ -102,14 +102,10 @@ class P3DX:
         
     def autopilot(self, speed):
         prev_detect = [False, False, False, False]
-
-        while 1:
+        tstart = time()
+        while (time()-tstart) < 1200:
             cte = 1
-            if keyboard.is_pressed('ctrl'):
-                print("Saindo do piloto automático")
-                self.Speed = 0
-                sleep(self.operationtime)
-                break
+            
             detect = [False, False, False, False]
             #Lê a distância entre o carro e cada parede
             for i in range(0,4):
@@ -170,6 +166,10 @@ class P3DX:
                             sleep(self.operationtime)
       
             prev_detect = detect
+        print("Saindo do piloto automático")
+        self.Speed = 0
+        sleep(self.operationtime)
+
             
 
     @property

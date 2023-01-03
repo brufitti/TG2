@@ -11,9 +11,9 @@ class RSS:
         #constantes
         self.connectionID = connectionID
         self.pioneerheight = 0.1387
-        self.P1 = [1.20000, 2.49000, 0.75000]
+        self.P1 = [ 1.20000,  2.49000, 0.75000]
         self.P2 = [-2.49000, -2.00000, 0.75000]
-        self.P3 = [2.00000, -2.49000, 0.75000]
+        self.P3 = [ 2.00000, -2.49000, 0.75000]
         #handles
         error_code, self.pioneer = sim.simxGetObjectHandle(self.connectionID, "Pioneer_p3dx", sim.simx_opmode_blocking)
         error_code, self.transmissor[0] = sim.simxGetObjectHandle(self.connectionID, "Transmissor1", sim.simx_opmode_blocking)
