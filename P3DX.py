@@ -28,23 +28,25 @@ class P3DX:
         error_code, self.rightMotor = sim.simxGetObjectHandle(self.connectionID, "Pioneer_p3dx_rightMotor", sim.simx_opmode_blocking)
         assert error_code == 0, 'could not connect to rightMotor.'
 
-        error_code, self.walls[0] = sim.simxGetObjectHandle(self.connectionID, "WallN", sim.simx_opmode_blocking)
-        error_code, self.walls[1] = sim.simxGetObjectHandle(self.connectionID, "WallS", sim.simx_opmode_blocking)
-        error_code, self.walls[2] = sim.simxGetObjectHandle(self.connectionID, "WallL", sim.simx_opmode_blocking)
-        error_code, self.walls[3] = sim.simxGetObjectHandle(self.connectionID, "WallO", sim.simx_opmode_blocking)
+        _, self.walls[0] = sim.simxGetObjectHandle(self.connectionID, "WallN", sim.simx_opmode_blocking)
+        _, self.walls[1] = sim.simxGetObjectHandle(self.connectionID, "WallS", sim.simx_opmode_blocking)
+        _, self.walls[2] = sim.simxGetObjectHandle(self.connectionID, "WallL", sim.simx_opmode_blocking)
+        _, self.walls[3] = sim.simxGetObjectHandle(self.connectionID, "WallO", sim.simx_opmode_blocking)
         
         #seta o carro em uma posição inicial e coloca a caster wheel em sentido favorável ao movimento.
         sim.simxSetObjectPosition(self.connectionID, self.pioneer, self.reference, (0,0,0.145), sim.simx_opmode_oneshot)
         sim.simxSetObjectOrientation(self.connectionID, self.pioneer, -1 , (0,0,0), sim.simx_opmode_oneshot)
-       
+        
         sleep(0.01)
         #define os parâmetros de telemetria inicial e inicia o modo streaming.
-        returncode, position = sim.simxGetObjectPosition(self.connectionID,self.pioneer,self.reference, sim.simx_opmode_streaming)
+        _, position = sim.simxGetObjectPosition(self.connectionID,self.pioneer,self.reference, sim.simx_opmode_streaming)
         self.position = [position[0], position[1]]
 
-        returnCode, orientation = sim.simxGetObjectOrientation(self.connectionID, self.pioneer,-1, sim.simx_opmode_streaming)
+        _, orientation = sim.simxGetObjectOrientation(self.connectionID, self.pioneer,-1, sim.simx_opmode_streaming)
         self.orientation = orientation[2]*180/pi
-
+        
+        _ = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_streaming)
+        
         for i in range(0,4):
                 err, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
                 err, ori = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
@@ -53,16 +55,10 @@ class P3DX:
         returncode, position = sim.simxGetObjectPosition(self.connectionID,self.pioneer,self.reference, sim.simx_opmode_buffer)
         self.position = [position[0], position[1]]
         return self.position
-
-    def getVelocity(self, returnnumber = 1):
-        code, velocity, angular = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_buffer)
-        v0 = math.sqrt((velocity[0]**2) + (velocity[1]**2) + (velocity[2]**2))
-        if returnnumber == 1:
-            return v0
-        elif returnnumber == 2:
-            return velocity
-        else:
-            return [v0, velocity]
+    def getVelocity(self):
+        _, velocity, angular = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_buffer)
+        return (velocity[0], velocity[1], velocity[2], angular[2]*180/pi)
+    
 
     def getOrientation(self):
         returnCode, orientation = sim.simxGetObjectOrientation(self.connectionID, self.pioneer,-1, sim.simx_opmode_buffer)
@@ -105,7 +101,7 @@ class P3DX:
         tstart = time()
         while (time()-tstart) < 1200:
             cte = 1
-            
+            _, vel, ang = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_buffer)
             detect = [False, False, False, False]
             #Lê a distância entre o carro e cada parede
             for i in range(0,4):
@@ -242,3 +238,12 @@ class P3DX:
             sleep(0.3)
             prevchecker = checker
         '''
+        '''     def alternativegetVelocity(self, returnnumber = 1):
+        _, velocity, angular = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_buffer)
+        v0 = math.sqrt((velocity[0]**2) + (velocity[1]**2) + (velocity[2]**2))
+        if returnnumber == 1:
+            return v0
+        elif returnnumber == 2:
+            return velocity
+        else:
+            return [v0, velocity] '''

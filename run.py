@@ -13,11 +13,11 @@ o tempo que leva para levar o carro do repouso a velocidade final, portanto uma 
 t=v [segundos]
 '''
 import sys
-from time import time, sleep
+from time import time, sleep, localtime
 from P3DX import P3DX
 from simulator import sim
 from simulator import SimConnection
-from math import pi
+from math import pi, sqrt
 from RSS import RSS
 import threading as th
 import queue
@@ -55,9 +55,10 @@ def speedCaller(freq, car):
     T, t0, o0 = 1/freq, tref, 0
     global V, Aa, t
     for i in range(0, 1200*freq):
-        vel = car.getVelocity()
+        velocity = car.getVelocity()
+        vel = sqrt((velocity[0]**2) + (velocity[1]**2) + (velocity[2]**2))
         V.put(vel)
-        o1 = car.getOrientation()
+        o1 = velocity[3]
         t1 = time()
         if t1-t0 != 0:
             dt = t1-t0
@@ -114,7 +115,7 @@ if __name__ == "__main__":
         sys.exit("Could not connect.")
     error_code, ping = sim.simxGetPingTime(conn.id)
     ping = ping/1000
-    print("Running with ping of " + str(ping) + " s.")
+    print("Running with ping of ", str(ping), " s.")
     print("-------------------------------")
     #create objects
     tref = time()
@@ -122,6 +123,8 @@ if __name__ == "__main__":
     finder = RSS(conn.id)
     stopall = th.Event()
     data.write("New dataset\n")
+    text = "current time, "+ str(localtime())+"\n"
+    data.write(text)
     data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n")
     th1 = th.Thread(target = speedCaller, args=(100,car,))
     th2 = th.Thread(target = dataCaller, args=(20,finder,car,))
