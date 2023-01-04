@@ -21,6 +21,8 @@ from math import pi, sqrt
 from RSS import RSS
 import threading as th
 import queue
+import csv
+
 """
 
 A fazer:
@@ -99,17 +101,18 @@ def dataCaller(freq, finder, car):
                 test = True  
         Vi = sum(Vlist)/len(Vlist)
         Aai = sum(Aalist)/len(Aalist)
-        Pos = finder.ReadSensor()
+        Pos = finder() #objeto RSS __call__
         t1 = time()
-        text = str(Vi)+" | "+str(Aai)+ " | " +str(Pos)+" | "+str(t1)+" | "+ str(PosR)+"\n"
-        data.write(text)
+        text = [Vi, Aai, Pos, t1-t0, PosR]
+        writer.writerow(text) #"Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n"
+        t0 = t1
         sleep((T)-(time()-tref)%T)
 
         
     
 #start
 if __name__ == "__main__":
-    data = open("data.txt", "a")
+    
     conn = SimConnection()
     if conn.id == -1:
         sys.exit("Could not connect.")
@@ -122,10 +125,8 @@ if __name__ == "__main__":
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
     stopall = th.Event()
-    data.write("New dataset\n")
-    text = "current time, "+ str(localtime())+"\n"
-    data.write(text)
-    data.write("Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n")
+    data = open('data.csv', 'w', newline='')
+    writer = csv.writer(data)
     th1 = th.Thread(target = speedCaller, args=(100,car,))
     th2 = th.Thread(target = dataCaller, args=(20,finder,car,))
     #da um pontapé no veículo para inicializar corretamente os sensores

@@ -15,22 +15,24 @@ class RSS:
         self.P2 = [-2.49000, -2.00000, 0.75000]
         self.P3 = [ 2.00000, -2.49000, 0.75000]
         #handles
-        error_code, self.pioneer = sim.simxGetObjectHandle(self.connectionID, "Pioneer_p3dx", sim.simx_opmode_blocking)
-        error_code, self.transmissor[0] = sim.simxGetObjectHandle(self.connectionID, "Transmissor1", sim.simx_opmode_blocking)
-        error_code, self.transmissor[1] = sim.simxGetObjectHandle(self.connectionID, "Transmissor2", sim.simx_opmode_blocking)
-        error_code, self.transmissor[2] = sim.simxGetObjectHandle(self.connectionID, "Transmissor3", sim.simx_opmode_blocking)
-        error_code, self.reference = sim.simxGetObjectHandle(self.connectionID, "Reference", sim.simx_opmode_blocking)
+        _, self.pioneer = sim.simxGetObjectHandle(self.connectionID, "Pioneer_p3dx", sim.simx_opmode_blocking)
+        _, self.transmissor[0] = sim.simxGetObjectHandle(self.connectionID, "Transmissor1", sim.simx_opmode_blocking)
+        _, self.transmissor[1] = sim.simxGetObjectHandle(self.connectionID, "Transmissor2", sim.simx_opmode_blocking)
+        _, self.transmissor[2] = sim.simxGetObjectHandle(self.connectionID, "Transmissor3", sim.simx_opmode_blocking)
+        _, self.reference = sim.simxGetObjectHandle(self.connectionID, "Reference", sim.simx_opmode_blocking)
         #start getting data
         d = []
         for i in range(3):
-            code, d = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
-            self.D[i] = float(((d[0]**2) + (d[1]**2))**0.5)
+            code, d[i] = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
+        for i in range(3):
+            self.D[i] = float(((d[i][0]**2) + (d[i][1]**2))**0.5)
         
     def readDistances(self):
         d = []
         for i in range(3):
-            code, d = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_buffer)
-            self.D[i] = float(((d[0]**2) + (d[1]**2))**0.5)
+            _, d[i] = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
+        for i in range(3):
+            self.D[i] = float(((d[i][0]**2) + (d[i][1]**2))**0.5)
     
     def triangulate(self):
         x1,y1,x2,y2 = self.getIntersections(self.P1[0],self.P1[1],self.D[0],self.P2[0],self.P2[1],self.D[1])
@@ -75,3 +77,7 @@ class RSS:
     def ReadSensor(self):
         self.readDistances()
         return self.triangulate()
+    
+    def __call__(self):
+        self.readDistances()
+        return self.D
