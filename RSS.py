@@ -21,14 +21,14 @@ class RSS:
         _, self.transmissor[2] = sim.simxGetObjectHandle(self.connectionID, "Transmissor3", sim.simx_opmode_blocking)
         _, self.reference = sim.simxGetObjectHandle(self.connectionID, "Reference", sim.simx_opmode_blocking)
         #start getting data
-        d = []
+        d = [0,0,0]
         for i in range(3):
-            code, d[i] = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
+            _, d[i] = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
         for i in range(3):
             self.D[i] = float(((d[i][0]**2) + (d[i][1]**2))**0.5)
         
     def readDistances(self):
-        d = []
+        d = [0,0,0]
         for i in range(3):
             _, d[i] = sim.simxGetObjectPosition(self.connectionID, self.pioneer, self.transmissor[i], sim.simx_opmode_streaming)
         for i in range(3):

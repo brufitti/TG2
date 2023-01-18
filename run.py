@@ -65,7 +65,7 @@ def speedCaller(freq, car):
         if t1-t0 != 0:
             dt = t1-t0
         else:
-            dt = 0.001
+            dt = T
         Aa.put((o1-o0)/(dt))
         o0= o1
         t0 = t1
@@ -73,7 +73,7 @@ def speedCaller(freq, car):
 
         
         
-def dataCaller(freq, finder, car):
+def dataCaller(freq, finder, car, writer):
     '''
     Devem existir as variáveis globais t (tempo de aglutinação), V (velocidade),
     Aa (aceleração Angular) e a lista P (posição pelo RSS).
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     data = open('data.csv', 'w', newline='')
     writer = csv.writer(data)
     th1 = th.Thread(target = speedCaller, args=(100,car,))
-    th2 = th.Thread(target = dataCaller, args=(20,finder,car,))
+    th2 = th.Thread(target = dataCaller, args=(20,finder,car,writer))
     #da um pontapé no veículo para inicializar corretamente os sensores
     car.Speed = 0.3
     sleep(0.3)
