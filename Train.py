@@ -4,85 +4,10 @@ import torch
 import torch.nn as nn
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
-
 # Parallel files
+from model import PositionPredictor
+from data import datacaller, Data
 
-# Loading the data
-# order: [float V, float Aa, list(float) Pos,  float dt, list(float) Real Position]
-def datacaller():
-    x = []
-    y = []
-    data = open('data.csv',newline='')
-    reader = csv.reader(data, delimiter = ",")
-    dataset = []
-    for row in reader:
-        dataset.append(row)
-    for values in dataset:
-        _temp2 = values[2].strip('][').split(',')
-        _temp2[0] = float(_temp2[0])
-        _temp2[1] = float(_temp2[1])
-        _temp2[2] = float(_temp2[2])
-        _temp4 = values[4].strip('][').split(',')
-        _temp4[0] = float(_temp4[0])
-        _temp4[1] = float(_temp4[1])
-        
-        _x= [float(values[0]), float(values[1]), float(_temp2[0]), float(_temp2[1]), float(_temp2[2]), float(values[3])]
-        _y= [_temp4[0], _temp4[1]]
-        
-        x.append(_x)
-        y.append(_y)
-    data.close()
-    
-    return np.array(x),np.array(y)
-
-class Data(Dataset):
-    def __init__(self,x,y):
-        self.x, self.y = x,y
-        
-    def __len__(self):
-        return len(self.y)
-    
-    def __getitem__(self, idx):
-        x = self.x[idx]
-        y = self.y[idx]
-        return x,y
-
-class PositionPredictor(nn.Module):
-    # aka PP
-    def __init__(self, input_size, out_size, hidden_size):
-        super(PositionPredictor, self).__init__()
-        
-        self.out_size = out_size
-        self.input_size = input_size
-        self.hidden_size = hidden_size  # might change to hidden features
-        
-        self.lstm1 = nn.LSTMCell(input_size=self.input_size, hidden_size=self.hidden_size)
-        self.lstm2 = nn.LSTMCell(input_size=self.hidden_size, hidden_size=self.hidden_size)
-        self.linear = nn.Linear(in_features=hidden_size, out_features=out_size)
-        
-    def forward(self, x):
-        outputs = []
-        data_size = len(x)
-        #set the parameters for LSTM
-        h_t = torch.zeros(data_size, self.hidden_size)
-        c_t = torch.zeros(data_size, self.hidden_size)
-        h_t2 = torch.zeros(data_size, self.hidden_size)
-        c_t2 = torch.zeros(data_size, self.hidden_size)
-        if torch.cuda.is_available():
-            h_t = h_t.cuda()
-            c_t = c_t.cuda()
-            h_t2 = h_t2.cuda()
-            c_t2 = c_t2.cuda()
-
-        h_t, c_t = self.lstm1(x, (h_t, c_t))
-        h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2)) # new hidden and cell states
-        output = self.linear(h_t2) # output from the last FC layer
-        #maybe add another RNN classic
-        outputs.append(output)
-        
-        outputs = torch.cat(outputs, dim=0).view(-1,2)
-        
-        return outputs
 
 def Train(model,dataloader, epoches, learning_rate):
     _ = torch.rand(20,20) #wake up the gpu
@@ -159,8 +84,8 @@ def Train(model,dataloader, epoches, learning_rate):
     
     
 if __name__ == '__main__':
-    x,y = datacaller()
-    data = Data(x,y)
+    
+    data = Data(datacaller())
     
     dataset = DataLoader(data, batch_size=int(data.__len__()), shuffle=False)
 
