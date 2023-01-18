@@ -86,7 +86,7 @@ class PositionPredictor(nn.Module):
 
 def Train(model,dataloader, epoches, learning_rate):
     _ = torch.rand(20,20) #wake up the gpu
-    optimizer = torch.optim.SGD(model.parameters(), lr = learning_rate)
+    optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
     criterion = torch.nn.MSELoss()
     dataset = dataloader
     pred = torch.zeros(8000,2)
@@ -148,10 +148,9 @@ def Train(model,dataloader, epoches, learning_rate):
     
     data = open('results10kepoches.csv', 'w', newline='')
     writer = csv.writer(data)
-    writer.writerow("y: x,y   |pred: x,y")
     fill = "|"
-    for i in y.size(0):
-        text =[y[i,0],y[i,1],fill,pred[i,0], pred[i,1]]
+    for i in range(y.size(0)):
+        text =[y[i].tolist(),fill,pred[i].tolist()]
         writer.writerow(text)
     return val_loss, val_error
         
