@@ -1,0 +1,56 @@
+Epoche:  100
+Train Loss:  0.17699913680553436
+Train Error:  tensor(0.2497, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  200
+Train Loss:  0.04660831391811371
+Train Error:  tensor(0.1341, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  300
+Train Loss:  0.02420283854007721
+Train Error:  tensor(0.0963, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  400
+Train Loss:  0.012286797165870667
+Train Error:  tensor(0.0641, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  500
+Train Loss:  0.010490689426660538
+Train Error:  tensor(0.0639, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  600
+Train Loss:  0.00889674387872219
+Train Error:  tensor(0.0588, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  700
+Train Loss:  0.009788122028112411
+Train Error:  tensor(0.0651, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  800
+Train Loss:  0.005163969472050667
+Train Error:  tensor(0.0430, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  900
+Train Loss:  0.008524127304553986
+Train Error:  tensor(0.0590, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1000
+Train Loss:  0.0059492620639503
+Train Error:  tensor(0.0477, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1100
+Train Loss:  0.004770813975483179
+Train Error:  tensor(0.0406, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1200
+Train Loss:  0.015908798202872276
+Train Error:  tensor(0.0787, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1300
+Train Loss:  0.038091957569122314
+Train Error:  tensor(0.1172, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1400
+Train Loss:  0.00424848310649395
+Train Error:  tensor(0.0378, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1500
+Train Loss:  0.046465545892715454
+Train Error:  tensor(0.1179, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1600
+Train Loss:  0.03293702378869057
+Train Error:  tensor(0.0915, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1700
+Train Loss:  0.0056121861562132835
+Train Error:  tensor(0.0434, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1800
+Train Loss:  0.004492174834012985
+Train Error:  tensor(0.0401, device='cuda:0', grad_fn=<AddBackward0>)
+Epoche:  1900
+Train Loss:  0.021451836451888084
