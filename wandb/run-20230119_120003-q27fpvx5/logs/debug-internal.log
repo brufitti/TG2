@@ -1,0 +1,126 @@
+2023-01-19 12:00:03,789 INFO    StreamThr :8688 [internal.py:wandb_internal():87] W&B internal server running at pid: 8688, started at: 2023-01-19 12:00:03.787858
+2023-01-19 12:00:03,799 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status
+2023-01-19 12:00:03,805 INFO    WriterThread:8688 [datastore.py:open_for_write():85] open: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\run-q27fpvx5.wandb
+2023-01-19 12:00:03,812 DEBUG   SenderThread:8688 [sender.py:send():334] send: header
+2023-01-19 12:00:03,972 DEBUG   SenderThread:8688 [sender.py:send():334] send: run
+2023-01-19 12:00:04,532 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: check_version
+2023-01-19 12:00:04,536 INFO    SenderThread:8688 [dir_watcher.py:__init__():216] watching files in: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\files
+2023-01-19 12:00:04,537 INFO    SenderThread:8688 [sender.py:_start_run_threads():1065] run started: q27fpvx5 with start time 1674140403.78686
+2023-01-19 12:00:04,538 DEBUG   SenderThread:8688 [sender.py:send_request():361] send_request: summary_record
+2023-01-19 12:00:04,538 INFO    SenderThread:8688 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-19 12:00:04,540 DEBUG   SenderThread:8688 [sender.py:send_request():361] send_request: check_version
+2023-01-19 12:00:04,659 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: run_start
+2023-01-19 12:00:05,120 DEBUG   HandlerThread:8688 [system_info.py:__init__():31] System info init
+2023-01-19 12:00:05,121 DEBUG   HandlerThread:8688 [system_info.py:__init__():46] System info init done
+2023-01-19 12:00:05,121 INFO    HandlerThread:8688 [system_monitor.py:start():151] Starting system monitor
+2023-01-19 12:00:05,123 INFO    HandlerThread:8688 [system_monitor.py:probe():172] Collecting system info
+2023-01-19 12:00:05,124 INFO    SystemMonitor:8688 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-01-19 12:00:05,127 INFO    SystemMonitor:8688 [interfaces.py:start():168] Started cpu
+2023-01-19 12:00:05,134 INFO    SystemMonitor:8688 [interfaces.py:start():168] Started disk
+2023-01-19 12:00:05,136 INFO    SystemMonitor:8688 [interfaces.py:start():168] Started gpu
+2023-01-19 12:00:05,139 INFO    SystemMonitor:8688 [interfaces.py:start():168] Started memory
+2023-01-19 12:00:05,147 INFO    SystemMonitor:8688 [interfaces.py:start():168] Started network
+2023-01-19 12:00:05,163 DEBUG   HandlerThread:8688 [system_info.py:probe():195] Probing system
+2023-01-19 12:00:05,166 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:05,167 DEBUG   HandlerThread:8688 [system_info.py:_probe_git():180] Probing git
+2023-01-19 12:00:05,167 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:05,307 DEBUG   HandlerThread:8688 [system_info.py:_probe_git():188] Probing git done
+2023-01-19 12:00:05,307 DEBUG   HandlerThread:8688 [system_info.py:probe():241] Probing system done
+2023-01-19 12:00:05,308 DEBUG   HandlerThread:8688 [system_monitor.py:probe():181] {'os': 'Windows-10-10.0.19045-SP0', 'python': '3.9.13', 'heartbeatAt': '2023-01-19T15:00:05.164091', 'startedAt': '2023-01-19T15:00:03.754947', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'b:\\Documents\\GitHub\\TG2\\Network\\Train.py', 'codePath': 'Network\\Train.py', 'git': {'remote': 'https://github.com/brufitti/TG2.git', 'commit': '65cd096f92bdafe39864a3a1f172533436eea904'}, 'email': '121069904+brufitti@users.noreply.github.com', 'root': 'B:/Documents/GitHub/TG2', 'host': 'DESKTOP-2TJBTS2', 'username': 'Bruno', 'executable': 'C:\\Users\\Bruno\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 1600.0, 'min': 0.0, 'max': 1800.0}, 'cpu_freq_per_core': [{'current': 1600.0, 'min': 0.0, 'max': 1800.0}], 'disk': {'total': 465.74511337280273, 'used': 192.7789192199707}, 'gpu': 'NVIDIA GeForce 930MX', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce 930MX', 'memory_total': 2147483648}], 'memory': {'total': 15.889213562011719}}
+2023-01-19 12:00:05,308 INFO    HandlerThread:8688 [system_monitor.py:probe():182] Finished collecting system info
+2023-01-19 12:00:05,308 INFO    HandlerThread:8688 [system_monitor.py:probe():185] Publishing system info
+2023-01-19 12:00:05,308 DEBUG   HandlerThread:8688 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-01-19 12:00:05,309 DEBUG   HandlerThread:8688 [system_info.py:_save_pip():67] Saving pip packages done
+2023-01-19 12:00:05,312 INFO    HandlerThread:8688 [system_monitor.py:probe():187] Finished publishing system info
+2023-01-19 12:00:05,337 DEBUG   SenderThread:8688 [sender.py:send():334] send: files
+2023-01-19 12:00:05,338 INFO    SenderThread:8688 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-01-19 12:00:05,382 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: stop_status
+2023-01-19 12:00:05,383 DEBUG   SenderThread:8688 [sender.py:send_request():361] send_request: stop_status
+2023-01-19 12:00:05,549 INFO    Thread-22 :8688 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\files\wandb-summary.json
+2023-01-19 12:00:05,550 INFO    Thread-22 :8688 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\files\requirements.txt
+2023-01-19 12:00:05,552 INFO    Thread-22 :8688 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\files\wandb-metadata.json
+2023-01-19 12:00:05,617 DEBUG   SenderThread:8688 [sender.py:send():334] send: telemetry
+2023-01-19 12:00:06,048 INFO    Thread-27 :8688 [upload_job.py:push():143] Uploaded file C:\Users\Bruno\AppData\Local\Temp\tmpn4lwa__9wandb\f5vewnq4-wandb-metadata.json
+2023-01-19 12:00:07,398 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:07,398 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:09,588 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:09,588 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:09,663 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:11,781 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:11,781 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:13,979 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:13,979 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:14,705 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:16,178 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:16,178 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:18,375 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:18,375 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:19,768 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:20,378 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:20,379 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:20,571 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:20,571 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:22,762 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:22,762 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:24,812 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:24,948 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:24,949 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:25,465 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:27,145 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:27,146 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:29,341 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:29,342 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:29,863 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:30,480 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:31,546 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:31,547 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:33,734 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:33,734 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:34,905 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:35,527 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:35,891 INFO    Thread-22 :8688 [dir_watcher.py:_on_file_modified():292] file/dir modified: B:\Documents\GitHub\TG2\wandb\run-20230119_120003-q27fpvx5\files\config.yaml
+2023-01-19 12:00:35,922 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:35,922 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:38,113 ERROR   gpu       :8688 [interfaces.py:aggregate():146] Failed to serialize metric: division by zero
+2023-01-19 12:00:38,129 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:38,129 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:40,302 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:40,302 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:40,334 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:40,537 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:42,485 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:42,485 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:44,682 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:44,682 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:45,396 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:45,593 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:46,863 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:46,863 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:49,051 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:49,051 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:50,452 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:50,654 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:51,234 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:51,234 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:53,415 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:53,415 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:55,484 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:00:55,601 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:55,601 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:55,686 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:00:57,783 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:57,783 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:59,987 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:00:59,987 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:00,525 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:01:00,732 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:01:02,171 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:02,171 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:04,352 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:04,352 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:05,174 DEBUG   SystemMonitor:8688 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-01-19 12:01:05,174 DEBUG   SenderThread:8688 [sender.py:send():334] send: stats
+2023-01-19 12:01:05,760 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-19 12:01:06,180 DEBUG   HandlerThread:8688 [handler.py:handle_request():144] handle_request: status_report
+2023-01-19 12:01:06,547 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-19 12:01:06,547 ERROR   gpu       :8688 [interfaces.py:monitor():129] Failed to sample metric: Not Supported

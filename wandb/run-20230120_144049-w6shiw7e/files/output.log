@@ -1,0 +1,200 @@
+Epoche:  100
+Validation Loss:  0.05885729193687439
+Epoche:  200
+Validation Loss:  0.007018926087766886
+Epoche:  300
+Validation Loss:  0.0036673960275948048
+Epoche:  400
+Validation Loss:  0.0025091739371418953
+Epoche:  500
+Validation Loss:  0.00195650989189744
+Epoche:  600
+Validation Loss:  0.001837279531173408
+Epoche:  700
+Validation Loss:  0.0012892326340079308
+Epoche:  800
+Validation Loss:  0.0011377801420167089
+Epoche:  900
+Validation Loss:  0.0010249975603073835
+Epoche:  1000
+Validation Loss:  0.0009631587308831513
+Epoche:  1100
+Validation Loss:  0.0020579558331519365
+Epoche:  1200
+Validation Loss:  0.0015180661575868726
+Epoche:  1300
+Validation Loss:  0.0008487916202284396
+Epoche:  1400
+Validation Loss:  0.001005183206871152
+Epoche:  1500
+Validation Loss:  0.0008463180274702609
+Epoche:  1600
+Validation Loss:  0.0010271426290273666
+Epoche:  1700
+Validation Loss:  0.0013580071972683072
+Epoche:  1800
+Validation Loss:  0.0006793547654524446
+Epoche:  1900
+Validation Loss:  0.0007537348428741097
+Epoche:  2000
+Validation Loss:  0.0006790119223296642
+Epoche:  2100
+Validation Loss:  0.0014808268751949072
+Epoche:  2200
+Validation Loss:  0.0006722421967424452
+Epoche:  2300
+Validation Loss:  0.0005830846494063735
+Epoche:  2400
+Validation Loss:  0.0013616416836157441
+Epoche:  2500
+Validation Loss:  0.000582474225666374
+Epoche:  2600
+Validation Loss:  0.0017024979460984468
+Epoche:  2700
+Validation Loss:  0.0006283039692789316
+Epoche:  2800
+Validation Loss:  0.0005988326156511903
+Epoche:  2900
+Validation Loss:  0.0005841215024702251
+Epoche:  3000
+Validation Loss:  0.0009728735312819481
+Epoche:  3100
+Validation Loss:  0.0005551334470510483
+Epoche:  3200
+Validation Loss:  0.0005493813659995794
+Epoche:  3300
+Validation Loss:  0.0004950538277626038
+Epoche:  3400
+Validation Loss:  0.0005918827373534441
+Epoche:  3500
+Validation Loss:  0.0008896006038412452
+Epoche:  3600
+Validation Loss:  0.00046765778097324073
+Epoche:  3700
+Validation Loss:  0.0005978380795568228
+Epoche:  3800
+Validation Loss:  0.0004747048078570515
+Epoche:  3900
+Validation Loss:  0.00044501974480226636
+Epoche:  4000
+Validation Loss:  0.0018227058462798595
+Epoche:  4100
+Validation Loss:  0.0005449538584798574
+Epoche:  4200
+Validation Loss:  0.00047097945935092866
+Epoche:  4300
+Validation Loss:  0.0005500310799106956
+Epoche:  4400
+Validation Loss:  0.0004798040317837149
+Epoche:  4500
+Validation Loss:  0.0004645018489100039
+Epoche:  4600
+Validation Loss:  0.0005439504748210311
+Epoche:  4700
+Validation Loss:  0.0005274916184134781
+Epoche:  4800
+Validation Loss:  0.0003929189988411963
+Epoche:  4900
+Validation Loss:  0.0008876667125150561
+Epoche:  5000
+Validation Loss:  0.0004014069272670895
+Epoche:  5100
+Validation Loss:  0.0003908817016053945
+Epoche:  5200
+Validation Loss:  0.0003746238653548062
+Epoche:  5300
+Validation Loss:  0.0006933137774467468
+Epoche:  5400
+Validation Loss:  0.0003690643352456391
+Epoche:  5500
+Validation Loss:  0.0010667287278920412
+Epoche:  5600
+Validation Loss:  0.0003759436949621886
+Epoche:  5700
+Validation Loss:  0.0006556572625413537
+Epoche:  5800
+Validation Loss:  0.0008758303592912853
+Epoche:  5900
+Validation Loss:  0.00043145878589712083
+Epoche:  6000
+Validation Loss:  0.0003470650699455291
+Epoche:  6100
+Validation Loss:  0.0003402284055482596
+Epoche:  6200
+Validation Loss:  0.0003587232204154134
+Epoche:  6300
+Validation Loss:  0.0006640914361923933
+Epoche:  6400
+Validation Loss:  0.00032284134067595005
+Epoche:  6500
+Validation Loss:  0.000320861057844013
+Epoche:  6600
+Validation Loss:  0.00038893005694262683
+Epoche:  6700
+Validation Loss:  0.0003912725078407675
+Epoche:  6800
+Validation Loss:  0.0003207049740012735
+Epoche:  6900
+Validation Loss:  0.00040595739847049117
+Epoche:  7000
+Validation Loss:  0.0003420025750529021
+Epoche:  7100
+Validation Loss:  0.0002981067227665335
+Epoche:  7200
+Validation Loss:  0.00028434896375983953
+Epoche:  7300
+Validation Loss:  0.001210952759720385
+Epoche:  7400
+Validation Loss:  0.0003116259758826345
+Epoche:  7500
+Validation Loss:  0.0004366268403828144
+Epoche:  7600
+Validation Loss:  0.0008359912899322808
+Epoche:  7700
+Validation Loss:  0.0003295251226518303
+Epoche:  7800
+Validation Loss:  0.0006350959884002805
+Epoche:  7900
+Validation Loss:  0.0008054627105593681
+Epoche:  8000
+Validation Loss:  0.000677201256621629
+Epoche:  8100
+Validation Loss:  0.00031982854125089943
+Epoche:  8200
+Validation Loss:  0.0006957448204047978
+Epoche:  8300
+Validation Loss:  0.0003308423329144716
+Epoche:  8400
+Validation Loss:  0.0005127248005010188
+Epoche:  8500
+Validation Loss:  0.00029633360099978745
+Epoche:  8600
+Validation Loss:  0.0004434495931491256
+Epoche:  8700
+Validation Loss:  0.0002670677495189011
+Epoche:  8800
+Validation Loss:  0.00044010826968587935
+Epoche:  8900
+Validation Loss:  0.0003275331691838801
+Epoche:  9000
+Validation Loss:  0.00032316704164259136
+Epoche:  9100
+Validation Loss:  0.0009735965868458152
+Epoche:  9200
+Validation Loss:  0.000274060555966571
+Epoche:  9300
+Validation Loss:  0.0003117268206551671
+Epoche:  9400
+Validation Loss:  0.0003311725449748337
+Epoche:  9500
+Validation Loss:  0.0002881991385947913
+Epoche:  9600
+Validation Loss:  0.0006069458904676139
+Epoche:  9700
+Validation Loss:  0.0002446080034133047
+Epoche:  9800
+Validation Loss:  0.00025018834276124835
+Epoche:  9900
+Validation Loss:  0.00038507781573571265
+Epoche:  10000
+Validation Loss:  0.0004943623789586127

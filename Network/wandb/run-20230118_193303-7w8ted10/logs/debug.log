@@ -1,0 +1,24 @@
+2023-01-18 19:33:03,771 INFO    MainThread:11908 [wandb_setup.py:_flush():68] Configure stats pid to 11908
+2023-01-18 19:33:03,771 INFO    MainThread:11908 [wandb_setup.py:_flush():68] Loading settings from C:\Users\Bruno\.config\wandb\settings
+2023-01-18 19:33:03,771 INFO    MainThread:11908 [wandb_setup.py:_flush():68] Loading settings from B:\Documents\GitHub\TG2\wandb\settings
+2023-01-18 19:33:03,772 INFO    MainThread:11908 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-01-18 19:33:03,772 INFO    MainThread:11908 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program_relpath': 'Train.py', 'program': 'b:\\Documents\\GitHub\\TG2\\Train.py'}
+2023-01-18 19:33:03,773 INFO    MainThread:11908 [wandb_init.py:_log_setup():478] Logging user logs to B:\Documents\GitHub\TG2\wandb\run-20230118_193303-7w8ted10\logs\debug.log
+2023-01-18 19:33:03,773 INFO    MainThread:11908 [wandb_init.py:_log_setup():479] Logging internal logs to B:\Documents\GitHub\TG2\wandb\run-20230118_193303-7w8ted10\logs\debug-internal.log
+2023-01-18 19:33:03,776 INFO    MainThread:11908 [wandb_init.py:init():518] calling init triggers
+2023-01-18 19:33:03,776 INFO    MainThread:11908 [wandb_init.py:init():521] wandb.init called with sweep_config: {}
+config: {}
+2023-01-18 19:33:03,778 INFO    MainThread:11908 [wandb_init.py:init():571] starting backend
+2023-01-18 19:33:03,778 INFO    MainThread:11908 [wandb_init.py:init():575] setting up manager
+2023-01-18 19:33:03,787 INFO    MainThread:11908 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=spawn, using: spawn
+2023-01-18 19:33:03,800 INFO    MainThread:11908 [wandb_init.py:init():582] backend started and connected
+2023-01-18 19:33:03,809 INFO    MainThread:11908 [wandb_init.py:init():670] updated telemetry
+2023-01-18 19:33:03,992 INFO    MainThread:11908 [wandb_init.py:init():710] communicating run to backend with 60.0 second timeout
+2023-01-18 19:33:04,792 INFO    MainThread:11908 [wandb_run.py:_on_init():2121] communicating current version
+2023-01-18 19:33:05,174 INFO    MainThread:11908 [wandb_run.py:_on_init():2125] got version response 
+2023-01-18 19:33:05,175 INFO    MainThread:11908 [wandb_init.py:init():758] starting run threads in backend
+2023-01-18 19:33:05,930 INFO    MainThread:11908 [wandb_run.py:_console_start():2101] atexit reg
+2023-01-18 19:33:05,935 INFO    MainThread:11908 [wandb_run.py:_redirect():1959] redirect: SettingsConsole.WRAP_RAW
+2023-01-18 19:33:05,936 INFO    MainThread:11908 [wandb_run.py:_redirect():2024] Wrapping output streams.
+2023-01-18 19:33:05,937 INFO    MainThread:11908 [wandb_run.py:_redirect():2046] Redirects installed.
+2023-01-18 19:33:05,938 INFO    MainThread:11908 [wandb_init.py:init():798] run started, returning control to user process

@@ -1,0 +1,25 @@
+2023-01-20 14:40:49,374 INFO    MainThread:43555 [wandb_setup.py:_flush():68] Configure stats pid to 43555
+2023-01-20 14:40:49,374 INFO    MainThread:43555 [wandb_setup.py:_flush():68] Loading settings from /home/bruno/.config/wandb/settings
+2023-01-20 14:40:49,374 INFO    MainThread:43555 [wandb_setup.py:_flush():68] Loading settings from /home/bruno/TG2-Branch2/wandb/settings
+2023-01-20 14:40:49,374 INFO    MainThread:43555 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-01-20 14:40:49,374 INFO    MainThread:43555 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program_relpath': 'Network/Train.py', 'program': '/home/bruno/TG2-Branch2/Network/Train.py'}
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:_log_setup():478] Logging user logs to /home/bruno/TG2-Branch2/wandb/run-20230120_144049-w6shiw7e/logs/debug.log
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:_log_setup():479] Logging internal logs to /home/bruno/TG2-Branch2/wandb/run-20230120_144049-w6shiw7e/logs/debug-internal.log
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:init():518] calling init triggers
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:init():521] wandb.init called with sweep_config: {}
+config: {}
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:init():571] starting backend
+2023-01-20 14:40:49,375 INFO    MainThread:43555 [wandb_init.py:init():575] setting up manager
+2023-01-20 14:40:49,377 INFO    MainThread:43555 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-01-20 14:40:49,379 INFO    MainThread:43555 [wandb_init.py:init():582] backend started and connected
+2023-01-20 14:40:49,381 INFO    MainThread:43555 [wandb_init.py:init():670] updated telemetry
+2023-01-20 14:40:49,382 INFO    MainThread:43555 [wandb_init.py:init():710] communicating run to backend with 60.0 second timeout
+2023-01-20 14:40:50,261 INFO    MainThread:43555 [wandb_run.py:_on_init():2121] communicating current version
+2023-01-20 14:40:50,448 INFO    MainThread:43555 [wandb_run.py:_on_init():2125] got version response 
+2023-01-20 14:40:50,448 INFO    MainThread:43555 [wandb_init.py:init():758] starting run threads in backend
+2023-01-20 14:40:51,934 INFO    MainThread:43555 [wandb_run.py:_console_start():2101] atexit reg
+2023-01-20 14:40:51,935 INFO    MainThread:43555 [wandb_run.py:_redirect():1959] redirect: SettingsConsole.WRAP_RAW
+2023-01-20 14:40:51,935 INFO    MainThread:43555 [wandb_run.py:_redirect():2024] Wrapping output streams.
+2023-01-20 14:40:51,935 INFO    MainThread:43555 [wandb_run.py:_redirect():2046] Redirects installed.
+2023-01-20 14:40:51,935 INFO    MainThread:43555 [wandb_init.py:init():798] run started, returning control to user process
+2023-01-20 17:40:50,827 WARNING MsgRouterThr:43555 [router.py:message_loop():77] message_loop has been closed
