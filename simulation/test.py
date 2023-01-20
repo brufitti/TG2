@@ -1,30 +1,8 @@
-#threading test
-import threading as th
-from time import sleep, perf_counter
+import numpy as np
 
-def printperf_counter():
-    t0 = perf_counter()
-    t = 0
-    while True:
-        print("time passed: ",perf_counter()-t0, "\n")
-        t +=perf_counter() - t0
-        print("total time: ", t)
-        t0 = perf_counter()
-        sleep(1-(perf_counter()%1))
-        
-        
+noise = np.random.normal(0,1,100)
+# 0 is the mean of the normal distribution you are choosing from
+# 1 is the standard deviation of the normal distribution
+# 100 is the number of elements you get in array noise
 
-def printpaft():
-    t0 = perf_counter()
-    while True:
-        print("time passed: ",perf_counter()-t0)
-        print("wait for: ", 0.5-(perf_counter()%0.5))
-        sleep(0.5-(perf_counter()%0.5))
-        t0 = perf_counter()
-
-th1 = th.Thread(target = printperf_counter)
-sleep(0.1)
-th2 = th.Thread(target = printpaft)
-
-#th1.start()
-th2.start()
+print(noise)

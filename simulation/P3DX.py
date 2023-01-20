@@ -124,19 +124,19 @@ class P3DX:
                 if emergency_detect[i] == True:
                     print("Muito próximo da parede ", self.walls[i])
                     self.Speed = -speed
-                    sleep(0.4/speed)
+                    sleep(0.2/speed)
                     self.Speed = 0
                     #Turn 180º
-                    self.ddrive(0, 180, waux=-pi/2)
+                    self.ddrive(0, 130, waux=-pi/2)
                     sleep(self.operationtime-0.1)
                     self.Speed = 0
                     sleep(self.operationtime)
                     self.Speed = speed
-                    sleep(0.2/speed)
+                    sleep(0.5/speed)
                     self.Speed = 0
                     sleep(self.operationtime)
                     emergency_detect[i] = 0
-                    
+            prev_emergency_detect = emergency_detect
             #testa se precisa virar
             for i in range(0,4):
                 if (detect[i] == True and detect[i] != prev_detect[i]):

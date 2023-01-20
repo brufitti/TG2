@@ -130,8 +130,8 @@ if __name__ == "__main__":
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
     breaker = th.Event()
-    for speedtxt in range(4,5):
-        for degrees in range (60,120,60):
+    for speedtxt in range(1,6):
+        for degrees in range (0,300,60):
             if (speedtxt != 4) and (degrees != 60):
                 continue
             speed = speedtxt/10
