@@ -35,7 +35,7 @@ class P3DX:
         
         #seta o carro em uma posição inicial e coloca a caster wheel em sentido favorável ao movimento.
         sim.simxSetObjectPosition(self.connectionID, self.pioneer, self.reference, (0,0,0.145), sim.simx_opmode_oneshot)
-        sim.simxSetObjectOrientation(self.connectionID, self.pioneer, -1 , (0,0,0), sim.simx_opmode_oneshot)
+        sim.simxSetObjectOrientation(self.connectionID, self.pioneer, -1 , (0,0,pi*60/180), sim.simx_opmode_oneshot)
         
         sleep(0.01)
         #define os parâmetros de telemetria inicial e inicia o modo streaming.
@@ -48,8 +48,8 @@ class P3DX:
         _ = sim.simxGetObjectVelocity(self.connectionID, self.pioneer, sim.simx_opmode_streaming)
         
         for i in range(0,4):
-                err, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
-                err, ori = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
+                _, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
+                _, ori = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_streaming)
 
     def getPosition(self):
         returncode, position = sim.simxGetObjectPosition(self.connectionID,self.pioneer,self.reference, sim.simx_opmode_buffer)
@@ -96,8 +96,11 @@ class P3DX:
         sim.simxSetJointTargetVelocity(self.connectionID, self.rightMotor,wr, sim.simx_opmode_streaming)
         return
         
-    def autopilot(self, speed):
+    def autopilot(self, speed, start_angle):
+        sim.simxSetObjectPosition(self.connectionID, self.pioneer, self.reference, (0,0,0.145), sim.simx_opmode_oneshot)
+        sim.simxSetObjectOrientation(self.connectionID, self.pioneer, -1 , (0,0,pi*start_angle/180), sim.simx_opmode_oneshot)
         prev_detect = [False, False, False, False]
+        emergency_detect = [0,0,0,0]
         tstart = time()
         while (time()-tstart) < 1200:
             cte = 1
@@ -105,21 +108,40 @@ class P3DX:
             detect = [False, False, False, False]
             #Lê a distância entre o carro e cada parede
             for i in range(0,4):
-                err, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
+                _, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
             #detecta se precisa virar de alguma parede
             i = 0
             for dist in self.distances:
                 if dist <= 0.65:
                     detect[i] = True
-                elif dist <= 0.4:
-                    self.ddrive(0, 180*cte)
+                if dist <= 0.35:
+                    emergency_detect[i] = True
                 i = i + 1
                 self.Speed = speed
+            
+            # Testa se precisa desgrudar da parede
+            for i in range(0,4):
+                if emergency_detect[i] == True:
+                    print("Muito próximo da parede ", self.walls[i])
+                    self.Speed = -speed
+                    sleep(0.4/speed)
+                    self.Speed = 0
+                    #Turn 180º
+                    self.ddrive(0, 180, waux=-pi/2)
+                    sleep(self.operationtime-0.1)
+                    self.Speed = 0
+                    sleep(self.operationtime)
+                    self.Speed = speed
+                    sleep(0.2/speed)
+                    self.Speed = 0
+                    sleep(self.operationtime)
+                    emergency_detect[i] = 0
+                    
             #testa se precisa virar
             for i in range(0,4):
                 if (detect[i] == True and detect[i] != prev_detect[i]):
                     print("parede", self.walls[i], "encontrada")
-                    err, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
+                    _, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
                     inangle = angles[2]*180/pi
                     print("inangle: ", inangle)
                     if (inangle >=-180 and inangle <= -90):
@@ -132,7 +154,7 @@ class P3DX:
                         self.Speed = 0
                         sleep(self.operationtime)
                         #testa o angulo de saída da parede
-                        err, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
+                        _, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
                         outangle = angles[2]*180/pi
                         print("outangle: ", outangle)
                         #se for menor que 10º, vira mais um pouco
@@ -151,7 +173,7 @@ class P3DX:
                         self.Speed = 0
                         sleep(self.operationtime)
                         #testa o angulo de saída da parede
-                        err, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
+                        _, angles = sim.simxGetObjectOrientation(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
                         outangle = angles[2]*180/pi
                         print("outangle: ", outangle)
                         #se for menor que 10º, vira mais um pouco
@@ -216,7 +238,7 @@ class P3DX:
                 break
             count = 0
             for i in range(0,4):
-                err, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
+                _, self.distances[i] = sim.simxCheckDistance(self.connectionID, self.pioneer, self.walls[i], sim.simx_opmode_buffer)
             for dist in self.distances:
                 if dist <= 1.05:
                     checker[i] = True

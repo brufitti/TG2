@@ -35,6 +35,7 @@ update
 
 """
 
+# Global stuff
 V  = queue.Queue()
 Aa = queue.Queue()
 t = queue.Queue()
@@ -46,7 +47,7 @@ def get_all(queue):
         list.append(queue.get())
     return list
 
-def speedCaller(freq, car):
+def speedCaller(freq, car, breaker):
     '''
     Devem existir as listas globais V (velocidade) e Aa (aceleração angular).
     Deve ser passada a frequëncia de pulling do sensor de velocidade
@@ -56,7 +57,7 @@ def speedCaller(freq, car):
     tref = time()
     T, t0, o0 = 1/freq, tref, 0
     global V, Aa, t
-    for i in range(0, 1200*freq):
+    while 1:
         velocity = car.getVelocity()
         vel = sqrt((velocity[0]**2) + (velocity[1]**2) + (velocity[2]**2))
         V.put(vel)
@@ -70,10 +71,12 @@ def speedCaller(freq, car):
         o0= o1
         t0 = t1
         sleep((T)-(time()-tref)%T)
+        if breaker.is_set():
+            break
 
         
         
-def dataCaller(freq, finder, car, writer):
+def dataCaller(freq, finder, car, writer, breaker):
     '''
     Devem existir as variáveis globais t (tempo de aglutinação), V (velocidade),
     Aa (aceleração Angular) e a lista P (posição pelo RSS).
@@ -86,7 +89,7 @@ def dataCaller(freq, finder, car, writer):
     global V, Aa, t, data
     Vlist = [0]
     Aalist = [0]
-    for i in range(0, 1200*freq):
+    while 1:
         sleep(0.1)
         test = True
         PosR = car.getPosition()
@@ -101,16 +104,18 @@ def dataCaller(freq, finder, car, writer):
                 test = True  
         Vi = sum(Vlist)/len(Vlist)
         Aai = sum(Aalist)/len(Aalist)
-        Pos = finder() #objeto RSS __call__
+        Pos = finder() # objeto RSS __call__
         t1 = time()
         text = [Vi, Aai, Pos, t1-t0, PosR]
-        writer.writerow(text) #"Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n"
+        writer.writerow(text) # "Velocidade | aceleração angular | Posição (RSS) | time | Posição real\n"
         t0 = t1
         sleep((T)-(time()-tref)%T)
+        if breaker.is_set():
+            break
 
         
     
-#start
+# start
 if __name__ == "__main__":
     
     conn = SimConnection()
@@ -120,28 +125,44 @@ if __name__ == "__main__":
     ping = ping/1000
     print("Running with ping of ", str(ping), " s.")
     print("-------------------------------")
-    #create objects
+    # create objects
     tref = time()
     car = P3DX(connectionID=conn.id)
     finder = RSS(conn.id)
-    stopall = th.Event()
-    data = open('data.csv', 'w', newline='')
-    writer = csv.writer(data)
-    th1 = th.Thread(target = speedCaller, args=(100,car,))
-    th2 = th.Thread(target = dataCaller, args=(20,finder,car,writer))
-    #da um pontapé no veículo para inicializar corretamente os sensores
-    car.Speed = 0.3
-    sleep(0.3)
-    car.Speed = 0
-    sleep(car.operationtime)
-    #inicia as funções
-    th1.start()
-    th2.start()
-    car.autopilot(0.3)
-    
-    #Encerra a conexão e fecha o arquivo
-    data.close()
+    breaker = th.Event()
+    for speedtxt in range(4,5):
+        for degrees in range (60,120,60):
+            if (speedtxt != 4) and (degrees != 60):
+                continue
+            speed = speedtxt/10
+            print("-------New Batch-------")
+            print("Speed ={sp}".format(sp = speed))
+            print("Starting Angle ={ang}".format(ang = degrees))
+            filename = "data-{degree}-0{speeddecimal}mps.csv".format(degree = degrees, speeddecimal=speedtxt)
+            data = open(filename, 'w', newline='')
+            writer = csv.writer(data)
+            th1 = th.Thread(target = speedCaller, args=(100,car,breaker))
+            th2 = th.Thread(target = dataCaller, args=(20,finder,car,writer, breaker))
+            
+            # da um pontapé no veículo para inicializar corretamente os sensores
+            car.Speed = speed
+            sleep(0.4)
+            car.Speed = 0
+            sleep(car.operationtime)
+            
+            # inicia as funções
+            th1.start()
+            th2.start()
+            car.autopilot(speed, degrees)
+            
+            # para as threads
+            breaker.set()
+            # Espera tudo acabar, reseta o evento das threads e fecha o arquivo anterior
+            sleep(2)
+            data.close()
+            breaker.clear()
+            print("-------End of Batch-------")
     print("-------------------------------")
     print('closing connection')
-    sleep(0.25) #tempo para garantir o envio do ultimo comando
-    conn.close() #encerra a conexão com o simulador
+    sleep(0.25) # tempo para garantir o envio do ultimo comando
+    conn.close() # encerra a conexão com o simulador

@@ -9,9 +9,9 @@ import wandb
 from model import PositionPredictor
 from data import datacaller, Data
 
-wandb.init(project="A-whole-new-wo--project", name= "lr=0.01/3")
+wandb.init(project="projectPPv1.1", name= "diff_validation_lr=0.01/3")
 
-def Train(model,dataloader, epoches, learning_rate):
+def Train(model,train_dataloader, val_dataloader, epoches, learning_rate):
     wandb.config = {
                     "learning_rate": learning_rate,
                     "epoches": epoches,
@@ -21,7 +21,8 @@ def Train(model,dataloader, epoches, learning_rate):
     _ = torch.rand(20,20) #wake up the gpu
     optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
     criterion = torch.nn.MSELoss()
-    dataset = dataloader
+    train_dataset = train_dataloader
+    val_dataset = val_dataloader
     pred = torch.zeros(8000,2)
     y = torch.zeros(8000,2)
     
@@ -33,7 +34,7 @@ def Train(model,dataloader, epoches, learning_rate):
         # Training
         # ----------------------------------------------
         model.train()
-        for data in dataset:
+        for data in train_dataset:
             x,y = data
             x = x.float()
             y = y.float()
@@ -49,14 +50,14 @@ def Train(model,dataloader, epoches, learning_rate):
             
             train_loss += loss.item()
             train_error += torch.mean(torch.abs(y-pred))
-        train_loss = train_loss/len(dataset)
+        train_loss = train_loss/len(train_dataset)
         
         # Validation
         # ----------------------------------------------
         model.eval()
         
         with torch.no_grad():
-            for data in dataset:
+            for data in val_dataset:
                 x,y = data
                 x = x.float()
                 y = y.float()
@@ -77,10 +78,10 @@ def Train(model,dataloader, epoches, learning_rate):
                     
                     print("Epoche: ", epoche)
                     print("Validation Loss: ", val_loss)
-        val_loss = val_loss/len(dataset)
+        val_loss = val_loss/len(val_dataset)
         wandb.log({
             "Training loss": train_loss,
-            "Training loss": val_loss,
+            "Validation loss": val_loss,
         })
     
     # Saving the last predictions to a file along with the original positions   
@@ -100,19 +101,24 @@ def Train(model,dataloader, epoches, learning_rate):
     
     
 if __name__ == '__main__':
-    x,y = datacaller()
-    data = Data(x,y)
-    
-    dataset = DataLoader(data, batch_size=int(data.__len__()), shuffle=False)
+    train_file = 'Network/data-0d-03mps.csv'
+    tx,ty = datacaller(train_file)
+    tdata = Data(tx,ty)
+    train_dataset = DataLoader(tdata, batch_size=int(tdata.__len__()), shuffle=False)
 
+    val_file = 'Network/data-60d-03mps.csv'
+    vx,vy = datacaller(val_file)
+    vdata = Data(vx,vy)
+    val_dataset = DataLoader(vdata, batch_size=int(vdata.__len__()), shuffle=False)
+    
     # parameters for PP class
     input_size = 6
     out_size = 2
-    hidden_size = 6
+    hidden_size = 8
     network = PositionPredictor(input_size, out_size, hidden_size)
     if torch.cuda.is_available():
         network = network.cuda()
     # Parameters for Training
     epoches = 10001
     learning_rate = 0.003333333
-    a,b = Train(network,dataset, epoches, learning_rate)
+    a,b = Train(network,train_dataset,val_dataset, epoches, learning_rate)

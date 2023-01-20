@@ -5,10 +5,10 @@ from torch.utils.data import Dataset
 
 
 # order: [float V, float Aa, list(float) Pos,  float dt, list(float) Real Position]
-def datacaller():
+def datacaller(filename):
     x = []
     y = []
-    data = open('data.csv',newline='')
+    data = open(filename,newline='')
     reader = csv.reader(data, delimiter = ",")
     dataset = []
     for row in reader:
