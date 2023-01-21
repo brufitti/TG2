@@ -5,6 +5,7 @@ import torch.nn as nn
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 import wandb
+from noise import add_noise, noise_maker
 # Parallel files
 from model import PositionPredictor
 from data import datacaller, Data
@@ -36,6 +37,7 @@ def Train(model,train_dataloader, val_dataloader, epoches, learning_rate):
         model.train()
         for data in train_dataset:
             x,y = data
+            x = add_noise(x)
             x = x.float()
             y = y.float()
             if torch.cuda.is_available():
@@ -59,6 +61,7 @@ def Train(model,train_dataloader, val_dataloader, epoches, learning_rate):
         with torch.no_grad():
             for data in val_dataset:
                 x,y = data
+                x = add_noise(x)
                 x = x.float()
                 y = y.float()
                 if torch.cuda.is_available():

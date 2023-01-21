@@ -3,7 +3,6 @@ import csv
 import torch
 from torch.utils.data import Dataset
 
-
 # order: [float V, float Aa, list(float) Pos,  float dt, list(float) Real Position]
 def datacaller(filename):
     x = []

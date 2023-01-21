@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.9.13",
+    "heartbeatAt": "2023-01-21T16:00:33.469107",
+    "startedAt": "2023-01-21T16:00:31.868767",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "b:\\Documents\\GitHub\\TG2\\Network\\Train.py",
+    "codePath": "Network\\Train.py",
+    "git": {
+        "remote": "https://github.com/brufitti/TG2.git",
+        "commit": "e3ffe4699cc812bb651dde6c8007c6f674860ffb"
+    },
+    "email": "121069904+brufitti@users.noreply.github.com",
+    "root": "B:/Documents/GitHub/TG2",
+    "host": "DESKTOP-2TJBTS2",
+    "username": "Bruno",
+    "executable": "C:\\Users\\Bruno\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1600.0,
+        "min": 0.0,
+        "max": 1800.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1600.0,
+            "min": 0.0,
+            "max": 1800.0
+        }
+    ],
+    "disk": {
+        "total": 465.74511337280273,
+        "used": 193.12393188476562
+    },
+    "gpu": "NVIDIA GeForce 930MX",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce 930MX",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 15.889213562011719
+    }
+}
