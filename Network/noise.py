@@ -1,6 +1,7 @@
 import torch 
 
 def noise_maker(data, amp):
+    
     """Makes a random gaussian noise on top of data values given in data tensor.
     
     Args:
