@@ -1,0 +1,70 @@
+2023-01-21 13:00:31,905 INFO    StreamThr :10612 [internal.py:wandb_internal():87] W&B internal server running at pid: 10612, started at: 2023-01-21 13:00:31.904046
+2023-01-21 13:00:31,917 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: status
+2023-01-21 13:00:31,927 INFO    WriterThread:10612 [datastore.py:open_for_write():85] open: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\run-ehrbpsts.wandb
+2023-01-21 13:00:31,929 DEBUG   SenderThread:10612 [sender.py:send():334] send: header
+2023-01-21 13:00:32,118 DEBUG   SenderThread:10612 [sender.py:send():334] send: run
+2023-01-21 13:00:32,779 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: check_version
+2023-01-21 13:00:32,780 INFO    SenderThread:10612 [dir_watcher.py:__init__():216] watching files in: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files
+2023-01-21 13:00:32,782 INFO    SenderThread:10612 [sender.py:_start_run_threads():1065] run started: ehrbpsts with start time 1674316831.918051
+2023-01-21 13:00:32,782 DEBUG   SenderThread:10612 [sender.py:send_request():361] send_request: summary_record
+2023-01-21 13:00:32,782 INFO    SenderThread:10612 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 13:00:32,783 DEBUG   SenderThread:10612 [sender.py:send_request():361] send_request: check_version
+2023-01-21 13:00:32,909 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: run_start
+2023-01-21 13:00:33,426 DEBUG   HandlerThread:10612 [system_info.py:__init__():31] System info init
+2023-01-21 13:00:33,426 DEBUG   HandlerThread:10612 [system_info.py:__init__():46] System info init done
+2023-01-21 13:00:33,428 INFO    HandlerThread:10612 [system_monitor.py:start():151] Starting system monitor
+2023-01-21 13:00:33,430 INFO    HandlerThread:10612 [system_monitor.py:probe():172] Collecting system info
+2023-01-21 13:00:33,430 INFO    SystemMonitor:10612 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-01-21 13:00:33,432 INFO    SystemMonitor:10612 [interfaces.py:start():168] Started cpu
+2023-01-21 13:00:33,438 INFO    SystemMonitor:10612 [interfaces.py:start():168] Started disk
+2023-01-21 13:00:33,440 INFO    SystemMonitor:10612 [interfaces.py:start():168] Started gpu
+2023-01-21 13:00:33,443 INFO    SystemMonitor:10612 [interfaces.py:start():168] Started memory
+2023-01-21 13:00:33,451 INFO    SystemMonitor:10612 [interfaces.py:start():168] Started network
+2023-01-21 13:00:33,468 DEBUG   HandlerThread:10612 [system_info.py:probe():195] Probing system
+2023-01-21 13:00:33,471 DEBUG   HandlerThread:10612 [system_info.py:_probe_git():180] Probing git
+2023-01-21 13:00:33,476 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:33,477 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:33,623 DEBUG   HandlerThread:10612 [system_info.py:_probe_git():188] Probing git done
+2023-01-21 13:00:33,623 DEBUG   HandlerThread:10612 [system_info.py:probe():241] Probing system done
+2023-01-21 13:00:33,623 DEBUG   HandlerThread:10612 [system_monitor.py:probe():181] {'os': 'Windows-10-10.0.19045-SP0', 'python': '3.9.13', 'heartbeatAt': '2023-01-21T16:00:33.469107', 'startedAt': '2023-01-21T16:00:31.868767', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'b:\\Documents\\GitHub\\TG2\\Network\\Train.py', 'codePath': 'Network\\Train.py', 'git': {'remote': 'https://github.com/brufitti/TG2.git', 'commit': 'e3ffe4699cc812bb651dde6c8007c6f674860ffb'}, 'email': '121069904+brufitti@users.noreply.github.com', 'root': 'B:/Documents/GitHub/TG2', 'host': 'DESKTOP-2TJBTS2', 'username': 'Bruno', 'executable': 'C:\\Users\\Bruno\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 1600.0, 'min': 0.0, 'max': 1800.0}, 'cpu_freq_per_core': [{'current': 1600.0, 'min': 0.0, 'max': 1800.0}], 'disk': {'total': 465.74511337280273, 'used': 193.12393188476562}, 'gpu': 'NVIDIA GeForce 930MX', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce 930MX', 'memory_total': 2147483648}], 'memory': {'total': 15.889213562011719}}
+2023-01-21 13:00:33,623 INFO    HandlerThread:10612 [system_monitor.py:probe():182] Finished collecting system info
+2023-01-21 13:00:33,623 INFO    HandlerThread:10612 [system_monitor.py:probe():185] Publishing system info
+2023-01-21 13:00:33,624 DEBUG   HandlerThread:10612 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-01-21 13:00:33,627 DEBUG   HandlerThread:10612 [system_info.py:_save_pip():67] Saving pip packages done
+2023-01-21 13:00:33,630 INFO    HandlerThread:10612 [system_monitor.py:probe():187] Finished publishing system info
+2023-01-21 13:00:33,667 DEBUG   SenderThread:10612 [sender.py:send():334] send: files
+2023-01-21 13:00:33,668 INFO    SenderThread:10612 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-01-21 13:00:33,703 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: stop_status
+2023-01-21 13:00:33,706 DEBUG   SenderThread:10612 [sender.py:send_request():361] send_request: stop_status
+2023-01-21 13:00:33,811 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\wandb-summary.json
+2023-01-21 13:00:33,815 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\wandb-metadata.json
+2023-01-21 13:00:33,815 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\requirements.txt
+2023-01-21 13:00:34,563 INFO    Thread-27 :10612 [upload_job.py:push():143] Uploaded file C:\Users\Bruno\AppData\Local\Temp\tmpkzf7kl8nwandb\u5ti7zrv-wandb-metadata.json
+2023-01-21 13:00:34,927 DEBUG   SenderThread:10612 [sender.py:send():334] send: telemetry
+2023-01-21 13:00:35,672 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:35,673 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:36,952 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 13:00:37,697 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:37,697 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:37,845 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_created():275] file/dir created: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\output.log
+2023-01-21 13:00:39,730 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:39,731 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:39,869 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_modified():292] file/dir modified: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\output.log
+2023-01-21 13:00:41,761 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:41,763 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:42,209 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 13:00:43,789 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:43,791 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:45,802 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:45,803 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:47,254 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 13:00:47,990 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:47,990 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:48,705 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 13:00:48,706 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 13:00:49,977 INFO    Thread-22 :10612 [dir_watcher.py:_on_file_modified():292] file/dir modified: B:\Documents\GitHub\TG2\wandb\run-20230121_130031-ehrbpsts\files\output.log
+2023-01-21 13:00:49,997 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:49,998 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:52,015 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:52,016 ERROR   gpu       :10612 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-01-21 13:00:52,292 DEBUG   HandlerThread:10612 [handler.py:handle_request():144] handle_request: status_report
