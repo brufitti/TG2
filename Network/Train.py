@@ -100,22 +100,21 @@ def Train(model,train_dataloader, val_dataloader, epoches, learning_rate):
     return val_loss, val_error
         
 def filecaller():
-    filename = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    for i in range(15):
-        for speedtxt in range(1,6):
-            for degrees in range (0,300,60):
-                filename[i] = "data/data-{degree}-0{speeddecimal}mps.csv".format(degree = degrees, speeddecimal = speedtxt)
+    filename = []
+    for speedtxt in range(3,6):
+        for degrees in range (0,300,60):
+            filename.append("data/data-{degree}-0{speeddecimal}mps.csv".format(degree = degrees, speeddecimal = speedtxt))
     return filename
     
     
 if __name__ == '__main__':
     filename = filecaller() # vector of paths
-    train_files = [name for idx,name in enumerate(filename) if ((idx+1)%5!=0)]
+    train_files = [name for idx,name in enumerate(filename) if (((idx+1)!=2) and ((idx+1)!= 6 and ((idx+1)!=13)))]
     tx,ty = datacaller(train_files)
     tdata = Data(tx,ty)
     train_dataset = DataLoader(tdata, batch_size=int(tdata.__len__()), shuffle=False)
 
-    val_files = [x for i,x in enumerate(filename) if ((i+1)%5==0)]
+    val_files = [filename[1], filename[5], filename[12]]
     vx,vy = datacaller(val_files)
     vdata = Data(vx,vy)
     val_dataset = DataLoader(vdata, batch_size=int(vdata.__len__()), shuffle=False)

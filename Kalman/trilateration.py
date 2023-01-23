@@ -1,7 +1,7 @@
-def trilateration(distances):
-    x1,y1 = 1.2, 2.49
-    x2,y2 = -2.49,-2
-    x3,y3 = 2, -2.49
+def single_trilateration(distances):
+    x1,y1 =  1.20,  2.49
+    x2,y2 = -2.49, -2.00
+    x3,y3 =  2.00, -2.49
     
     d1 = distances[0]
     d2 = distances[1]
@@ -16,8 +16,16 @@ def trilateration(distances):
     
     x = (dr1 * y32 + dr2 * y13 + dr3 * y21)/(2.0*(x1*y32 + x2*y13 + x3*y21))
     y = (dr1 * x32 + dr2 * x13 + dr3 * x21)/(2.0*(y1*x32 + y2*x13 + y3*x21))
+    point = [x,y]
+    return point
 
-    return x,y
+def trilateration(d1_vec,d2_vec,d3_vec):
+    points = []
+    for idx in range(len(d1_vec)):
+        distances = [d1_vec[idx],d2_vec[idx],d3_vec[idx]]
+        point = single_trilateration(distances)
+        points.append(point)
+    return points
 
 # # Test
 # # [4.74056873169499, 1.4533688089768357, 3.1824857788144625]
