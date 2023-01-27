@@ -96,8 +96,8 @@ if __name__ == "__main__":
         # Data acquired from experiment 2
         var_tri_x = 0.020139725240178142
         var_tri_y = 0.01788998730140539
-        var_vel_x = 0.021589845726035863
-        var_vel_y = 0.02024044885157414
+        var_vel_x = 0.031589845726035863
+        var_vel_y = 0.03024044885157414
         
         
         # uncomment this for var testing
