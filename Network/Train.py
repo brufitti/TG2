@@ -5,7 +5,7 @@ import torch.nn as nn
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 import wandb
-from noise import add_noise, noise_maker
+from noise import add_noise
 # Parallel files
 from model import PositionPredictor
 from data import datacaller, Data
